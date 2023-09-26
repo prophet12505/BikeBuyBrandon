@@ -1,0 +1,18 @@
+.card{
+    margin: 5px 5px;
+}
+.card-body{
+    height: 400px;
+}
+.card-img-top{
+    height: 200px;
+}
+.card-price{
+    color: rgb(222, 31, 31);
+}
+.btn-add-to-cart{
+    position: absolute;
+    bottom: 15px;
+    left:50%;
+    transform: translateX(-50%);
+}

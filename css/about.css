@@ -1,0 +1,13 @@
+.ability-tag{
+    text-align: center;
+}
+.ability-img{
+    height:100px;
+    width: 100px;
+    margin: 0 auto;
+}
+.ability-col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
