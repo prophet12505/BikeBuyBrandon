@@ -14,7 +14,7 @@
     $arr["product_name"]=(strlen($arr['product_name']) > $limit) ? substr($arr['product_name'], 0, $limit) . " ..." : $arr['product_name'] . str_repeat(" ", $limit - strlen($arr['product_name']));
         echo (
             '
-            <div class="card" style="width: 18rem;">
+            <div class="card col-md-2 mt-3" >
                 <div class="card-body">
                 <h5 class="card-title">'.$arr["product_name"].'</h5>
                 <p class="card-text card-price">$'.$arr['price'].'</p>

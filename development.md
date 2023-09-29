@@ -26,3 +26,9 @@
 ## PDO is not necessary
 ## keep the original registerForm.php and the contactForm.php
 ## set up login as a floating window //
+## in a php query, first return number rows, secondly return the assoc array(maintainable) 
+
+
+## ERROR CODE
+### product service 
+-101 : product not found
