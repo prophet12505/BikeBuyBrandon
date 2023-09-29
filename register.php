@@ -44,6 +44,7 @@ function clean_input($data)
                         Message("We have successfully created your account", "success");
                         RegisterForm($showForm = false);
                     } else {//email exists
+                        //
                         Message("Email already exists", "warning");
                         RegisterForm($showForm = true);
                     }
@@ -52,7 +53,6 @@ function clean_input($data)
                     Message("Please make sure your password and repeated password are identical.", "warning");
                     RegisterForm($showForm = true);
                 }
-              
             } else {
                 Message("Oh no! Something went wrong while submitting the form", "warning");
                 RegisterForm($showForm = true);

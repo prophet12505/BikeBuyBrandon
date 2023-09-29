@@ -5,54 +5,49 @@
     session_start();
     $title="added to cart";
     $self=basename($_SERVER['PHP_SELF']);
-    require("./inc/header.php");
+    include("./inc/header.php");
+    include("./view/Message.php");
+    include("./service/ProductService.php");
 
-    #require("./inc/dbconnect.php");
-    print_r( $_SESSION['cart']);
 
-//check for one valid produc id
-if(isset($_GET['prod_id']) && filter_var($_GET['prod_id'],FILTER_VALIDATE_INT,
+    print_r($_SESSION['cart']);
+
+
+if(isset($_GET['product_id']) && filter_var($_GET['product_id'],FILTER_VALIDATE_INT,
 array("options"=>array('min_range'=>1)))){
+
         // get the product id 
-    $prod_id=$_GET['prod_id'];
-        
+    $product_id=$_GET['product_id'];
     echo '<div class="addcart">';
     //check if cart already contains this product 
-    if(isset($_SESSION['cart'][$prod_id])){
-        $_SESSION['cart'][$prod_id]['quantity']++; // add 1 ti the current quantity for this product
+    if(isset($_SESSION['cart'][$product_id])){
+        $_SESSION['cart'][$product_id]['quantity']++; // add 1 ti the current quantity for this product
         //display confirmation message that another product quantity has been added
-        echo '<div class="w3-container w3-teal"><h2>Added to Cart
-        <a href="viewcart.php"><i class="fas fa-shopping-cart" id="carticon" title="View Cart"></i></a>
-        </h2><p class="indent">Another item has been added to your shopping cart</p>';
+        Message('Another item has been added to your shopping cart','success');
     }
     else{
         // new product to put into cart or first time 
-        require("./inc/dbconnect.php");
-        $sql="SELECT prod_price FROM seansfoods_products WHERE prod_id=$prod_id";
-        $result=mysqli_query($dbc,$sql);
-        //check to see if a price for that product was returned
-        if(mysqli_num_rows($result)==1){
-            // save it into the cart array
-            //list() takes it out of an array and put it as an element
-            list($price)=mysqli_fetch_array($result,MYSQLI_NUM);
-            $_SESSION['cart'][$prod_id]=array(
+        include("./inc/dbconnect.php");
+        //getPriceByProductId
+        $productService=new productService($dbc);
+    $getPriceByProductIdResult=$productService->getPriceByProductId($product_id);
+        if($getPriceByProductIdResult['status']==0){
+            $_SESSION['cart'][$product_id]=array(
                 'quantity'=>1,
-                'price'=>$price
+                'price'=>$getPriceByProductIdResult['value']
             );
-            //display success message
-            echo '<div class="w3-container w3-teal"><h2>Added to Cart
-            <a href="viewcart.php"><i class="fas fa-shopping-cart" id="carticon" title="View Cart"></i></a>
-            </h2><p class="indent">The product has been added to your shopping cart</p>';
+            Message('A new item has been added to your shopping cart','success');
         }
-        else{
-            echo '<div class="w3-container w3-red"><h1>Oh No!</h1><p class="indent">Duplicate products lines in database or other database errors</p></div>';
+        else if($getPriceByProductIdResult['status']==111){
+            Message('Error: could not get price by product ID','warning');
         }
-        print_r($_SESSION['cart']);
+        
+       
         mysqli_close($dbc);
     }
 }
 else{
-    echo '<div class="w3-container w3-red"><h1>Oh No!</h1><p class="indent"> THis page has been accessed in error.</p></div>';
+    Message('Error: incorrect url format','warning');
 }
 
 echo '<p class="indent"><a href="previous.html" onClick="history.back();return false;"><button id="contbutton">Continue Shopping</button></a>

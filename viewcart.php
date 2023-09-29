@@ -15,19 +15,14 @@
 
     //display cart if not empty
     // new instance of product service 
-   
     if($_SESSION['cart']){
         require("./inc/dbconnect.php");
         $productService = new ProductService($dbc);
-        
-        Cart($_SESSION['cart'],$productService.getCartItems($_SESSION['cart']));
-        
-       
+        Cart($_SESSION['cart'],$productService->getCartItems($_SESSION['cart']));
         // if(mysql_num_rows(result)>0){
         //     mysqli_fetch_assoc($result);
         // }
         // else{
-
         // }
     }
 

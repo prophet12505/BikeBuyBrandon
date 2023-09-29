@@ -31,4 +31,8 @@
 
 ## ERROR CODE
 ### product service 
--101 : product not found
+-101 : product not be found (empty)
+-111: could not get price by product ID
+### Account service 
+-201 : Database error: multiple results for the given email and password
+-202 : user is not found for the given email and password
