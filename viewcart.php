@@ -15,31 +15,17 @@
 
     if($_SESSION['cart']){
         require("./inc/dbconnect.php");
-        //rewrite it to the service layer
-        $sql="SELECT product_id, product_name, price, 	image_url from seansfoods_products WHERE prod_id IN (";
-        foreach($_SESSION['cart'] as $prod_id => $val){
-            $sql.=" $prod_id,";
-        }
-        $sql=substr($sql,0,-1);//strip last comma
-        $sql.=") ORDER BY prod_name ASC";
-        // echo $sql;
-        $result=mysqli_query($dbc,$sql);
-        //create a form with a table Layout for the cart
         
-        // rewrite it into view layer 
-        echo '<section class="cart"><p id="cartdir">To delete an item from your cart, you can click the remove link or enter 0 for quantity and click update cart below</p>
-        <form action="viewcart.php" method="post">
-        <table class="cart">
-            <tr class="titles">
-            <th>Product</th>
-            <th>Product Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>Subtotal</th>
-            <th></th>
-        </tr>';
+
+        
 
         $total=0;
+        //convert it to an associative array to decouple view and service layer
+        //under work
+        // $data = array();
+        // while ($row = mysqli_fetch_assoc($result)) {
+        // $data[] = $row;
+        // }
         //loop through the cart
         while($row=mysqli_fetch_array($result,MYSQLI_ASSOC)){
             //calculate subtotals and total
