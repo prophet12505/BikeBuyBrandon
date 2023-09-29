@@ -13,14 +13,16 @@
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/index.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <!-- font awesome  -->
+    <script src="https://kit.fontawesome.com/c1145b9de9.js" crossorigin="anonymous"></script>
     <!-- jQuery and bootstrap should be put in the header    -->
     <script src="./js/jquery-3.6.3.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
-<nav class="navbar navbar-dark bg-dark">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">   
+<nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
+    <ul class="navbar-nav ml-5 mb-2 mb-lg-0">   
         <!-- pay attention to relative path, it's crucial -->
         <li class="nav-item">
             <a class="nav-link" href="./index.php">Home</a>
@@ -37,8 +39,14 @@
         <li class="nav-item">
             <a class="nav-link " href="./admin/dashboard.php">Dashboard</a>
         </li>
+        
+    </ul>
+    <ul class="navbar-nav  mb-2 mb-lg-0 me-5">
         <li class="nav-item">
-            <a class="nav-link " href="./login.php">Login</a>
+            <a class="nav-link h3" href="./login.php"> <i class="fa-solid fa-right-to-bracket"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link h3" href="./viewCart.php"><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
         </li>
     </ul>
 </nav>

@@ -23,7 +23,7 @@
                 </div>
               </div>
             </div>
-      <form name="formRegister" action="./register.php" class="form-group" method="post" novalidate>
+      <form name="formRegister" action="./login.php" class="form-group" method="post" novalidate>
                 <p style="color: red;">All fields are required</p>
                 <!-- <input type="text" name="name" id="name" placeholder="User Name" autofocus required class="form-control <?php
                 if (isset($_POST["submit"]) && empty($_POST["name"])) {

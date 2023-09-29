@@ -1,10 +1,15 @@
+<section>
+    <div class=" bg-light">
+        <h2>Sign Up</h2>
 <?php
 // form component for contact 
 function RegisterForm($showForm = true)
 {
+    
     if ($showForm) {
         //include('./inc/registerForm.php');
         ?>
+        
         <!-- registerForm html to be injected  -->
         <form name="formRegister" action="./register.php" class="form-group" method="post" novalidate>
             <p style="color: red;">All fields are required</p>
@@ -38,3 +43,5 @@ function RegisterForm($showForm = true)
     }
 }
 ?>
+    </div>
+</section>

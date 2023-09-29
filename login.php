@@ -28,7 +28,7 @@
     $accountService=new AccountService($dbc);
     
     if(!empty($_POST['email']) && !empty($_POST['password']))
-        $AuthLoginResult=$accountService.AuthLogin($_POST['email'],$_POST['password']);
+        $AuthLoginResult=$accountService->AuthLogin($_POST['email'],$_POST['password']);
         if($AuthLoginResult['status']==0){
             session_start();
             $_SESSION['user_id'] = $AuthLoginResult['value']['user_id'];
@@ -43,6 +43,7 @@
         }
         else if($AuthLoginResult['status']==201){
             Message("User does not exist or the email and password do not match",'danger');
+            LoginForm(true);
         }
         else if($AuthLoginResult['status']==202){
             Message('Server Error: 202','danger');
