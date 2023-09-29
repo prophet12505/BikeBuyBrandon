@@ -43,10 +43,11 @@ class ProductService {
 
     }
     //move the register process here 
-    public function getCartItems(){
+    public function getCartItems($cart){
+        
         //rewrite it to the service layer
         $sql="SELECT product_id, product_name, price, 	image_url from bikebuy WHERE product_id IN (";
-        foreach($_SESSION['cart'] as $prod_id => $val){
+        foreach($cart as $prod_id => $val){
             $sql.=" $prod_id,";
         }
         $sql=substr($sql,0,-1);//strip last comma
@@ -54,10 +55,15 @@ class ProductService {
         // echo $sql;
         $result=mysqli_query($this->dbc,$sql);
         //create a form with a table Layout for the cart
-        
-    }
+            $result_assoc = array();
+            while ($row = mysqli_fetch_assoc($result)) {
+            $result_assoc[] = $row;
+            }
+        mysqli_close($this->dbc);
+        return array("status"=>0,"value"=>$result_assoc);
+    }   
 
-    // ...
+    
 }
 
 
