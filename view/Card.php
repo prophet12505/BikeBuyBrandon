@@ -12,7 +12,7 @@
         //will truncate the string if it exceeds the limit, otherwise add spaces util it reach the limits
         //make sure the titles' length are consistent across different products
     $arr["product_name"]=(strlen($arr['product_name']) > $limit) ? substr($arr['product_name'], 0, $limit) . " ..." : $arr['product_name'] . str_repeat(" ", $limit - strlen($arr['product_name']));
-    print_r($arr);
+    // print_r($arr);
         echo (
             '
             <div class="card col-md-2 mt-3" >

@@ -9,7 +9,6 @@ $category="All categories";
 
   // render carouser 
   // render category bar
-
   Carousel();
   CategoryBar();
 
@@ -24,11 +23,9 @@ $category="All categories";
       } else {
           $category = 'All categories'; // select all products by default
       }
-
     $getProductsByCategoryResult=$productService->getProductsByCategory($category);
-
       if($getProductsByCategoryResult["status"]==0){
-         CardList($getProductsByCategoryResult["value"]);
+        CardList($getProductsByCategoryResult["value"]);
       }
       else if($getProductsByCategoryResult["status"]==101){
         Message('Sorry, they were no products found','warning');

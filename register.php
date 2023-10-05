@@ -12,7 +12,7 @@ include("./service/AccountService.php")
 <!-- html section    -->
 
         <?php
-            include('./inc/formUtil.php');
+            include('./inc/Utils.php');
             if (isset($_POST['submit'])) {
                 RegisterForm($showForm = false);
                 if (

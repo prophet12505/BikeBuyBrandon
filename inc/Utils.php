@@ -6,5 +6,10 @@
        $data = htmlspecialchars($data);
        return $data;
    }
+   function redirect_user($page="login.php",){
+    //use this to switch location
+    header("Location: $page");
+    exit();
+}
 
 ?>

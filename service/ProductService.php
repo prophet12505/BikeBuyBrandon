@@ -44,25 +44,32 @@ class ProductService
 
     }
     //move the register process here 
+    // to be debugged
     public function getCartItems($cart)
     {
+        if (!empty($cart)) {
+            // var_dump($cart);
+            //rewrite it to the service layer
+            $sql = "SELECT product_id, product_name, price, image_url from product WHERE product_id IN (";
+            foreach ($cart as $prod_id => $val) {
+                $sql .= " $prod_id,";
+            }
+            $sql = substr($sql, 0, -1); //strip last comma
+            $sql .= ") ORDER BY product_name ASC";
 
-        //rewrite it to the service layer
-        $sql = "SELECT product_id, product_name, price, image_url from product WHERE product_id IN (";
-        foreach ($cart as $prod_id => $val) {
-            $sql .= " $prod_id,";
+            $result = mysqli_query($this->dbc, $sql);
+            //create a form with a table Layout for the cart
+            $result_assoc = array();
+            while ($row = mysqli_fetch_assoc($result)) {
+                $result_assoc[] = $row;
+            }
+            //to be fixed: db connection close
+            // mysqli_close($this->dbc);
+            return array("status" => 0, "value" => $result_assoc);
         }
-        $sql = substr($sql, 0, -1); //strip last comma
-        $sql .= ") ORDER BY product_name ASC";
-        // echo $sql;
-        $result = mysqli_query($this->dbc, $sql);
-        //create a form with a table Layout for the cart
-        $result_assoc = array();
-        while ($row = mysqli_fetch_assoc($result)) {
-            $result_assoc[] = $row;
+        else{
+            return array("status" => 121, "value" => Null);
         }
-        mysqli_close($this->dbc);
-        return array("status" => 0, "value" => $result_assoc);
     }
     public function getPriceByProductId($product_id)
     {

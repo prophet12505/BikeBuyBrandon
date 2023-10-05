@@ -14,8 +14,6 @@
         return $data;
     }
 
-    
-
      //get endpoint
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     LoginForm(true);
@@ -38,7 +36,7 @@
             
             //setcookie('firstname',$_SESSION['firstname'],time()+86400*30,"/");
             //redirect user to a loggined page
-            //redirect_user('loggedin.php');
+            redirect_user('./index.php');
             //session_destroy();
         }
         else if($AuthLoginResult['status']==201){

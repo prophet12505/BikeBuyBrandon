@@ -9,10 +9,11 @@
     include("./view/Message.php");
     include("./service/ProductService.php");
 
-
-    print_r($_SESSION['cart']);
-
-
+    if(isset($_SESSION['cart']))
+        print_r($_SESSION['cart']);
+    else
+        $_SESSION['cart']=array();
+        
 if(isset($_GET['product_id']) && filter_var($_GET['product_id'],FILTER_VALIDATE_INT,
 array("options"=>array('min_range'=>1)))){
 
@@ -41,8 +42,6 @@ array("options"=>array('min_range'=>1)))){
         else if($getPriceByProductIdResult['status']==111){
             Message('Error: could not get price by product ID','warning');
         }
-        
-       
         mysqli_close($dbc);
     }
 }
