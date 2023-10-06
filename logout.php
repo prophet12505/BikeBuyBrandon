@@ -11,8 +11,8 @@
     $_SESSION['name'] = null;
     $_SESSION['email'] = null;
     $_SESSION['agent'] = null;
-    ButtonGroup(array('backToIndex'));
+    ButtonGroup(['backToIndex']);
 
     include("./inc/footer.php");
-    redirect_user('./login.php',3);
+    // redirect_user('./login.php');
 ?>

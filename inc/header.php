@@ -12,12 +12,15 @@
     <link rel="stylesheet" href="./css/about.css">
     <link rel="stylesheet" href="./css/dashboard.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/login.css">
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
     <!-- font awesome  -->
     <script src="https://kit.fontawesome.com/c1145b9de9.js" crossorigin="anonymous"></script>
     <!-- jQuery and bootstrap should be put in the header    -->
     <script src="./js/jquery-3.6.3.min.js"></script>
     <script src="./js/bootstrap.bundle.min.js"></script>
+    <!-- Vue.js   -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
 <div class="container-fluid">

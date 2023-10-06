@@ -1,0 +1,25 @@
+.login-container{
+    background: url('../img/loginBackground.jpg') no-repeat center;
+    background-size: cover;
+    
+    height: 70vh;
+}
+.login-panel{
+    background-color: white;
+    opacity: 0.95;
+    animation: loginAnimation 1s ease-in-out;
+}
+@keyframes loginAnimation {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      50% {
+        transform: translateY(10%);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 0.95;
+      }
+  }
