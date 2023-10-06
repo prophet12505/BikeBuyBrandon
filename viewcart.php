@@ -35,9 +35,7 @@
                 unset($_SESSION['cart'][$key]);
             }
         }
-
     }
-
     if(isset($_GET['product_id']) && isset($_SESSION['cart'][$_GET['product_id']])){
         unset($_SESSION['cart'][$_GET['product_id']]);
     }

@@ -2,17 +2,11 @@
 
     $title = "Bike Buy Brandon | Register";
     include("./inc/header.php");
-
+    include("./inc/Utils.php");
     include("./view/LoginForm.php");
     include("./view/Message.php");
     include("./service/AccountService.php");
-    function clean_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+    include("./view/ButtonGroup.php");
 
      //get endpoint
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -27,8 +21,9 @@
     
     if(!empty($_POST['email']) && !empty($_POST['password']))
         $AuthLoginResult=$accountService->AuthLogin($_POST['email'],$_POST['password']);
+        //successfully logged in
         if($AuthLoginResult['status']==0){
-            session_start();
+            //session_start();
             $_SESSION['user_id'] = $AuthLoginResult['value']['user_id'];
             $_SESSION['name'] = $AuthLoginResult['value']['name'];
             $_SESSION['email'] = $AuthLoginResult['value']['email'];
@@ -36,7 +31,10 @@
             
             //setcookie('firstname',$_SESSION['firstname'],time()+86400*30,"/");
             //redirect user to a loggined page
-            redirect_user('./index.php');
+            print_r($_SESSION);
+            //redirect_user('./index.php');
+            Message('You have successfully logged in', 'success');
+            ButtonGroup(['backToIndex']);
             //session_destroy();
         }
         else if($AuthLoginResult['status']==201){

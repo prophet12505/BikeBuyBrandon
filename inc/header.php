@@ -43,7 +43,27 @@
     </ul>
     <ul class="navbar-nav  mb-2 mb-lg-0 me-5">
         <li class="nav-item">
-            <a class="nav-link h3" href="./login.php"> <i class="fa-solid fa-right-to-bracket"></i></a>
+            <a class="nav-link h3" 
+            href=<?php
+                session_start();
+                if(!isset($_SESSION['user_id']))
+                    echo  "./login.php";
+                else{
+                    echo  "./logout.php";
+                }
+            ?>
+            > 
+                <?php
+                //session_start();
+                if(!isset($_SESSION['user_id']))
+                echo 'Login <i class="fa-solid fa-right-to-bracket"></i>';
+                else{
+                    echo 'Logout <i class="fa-solid fa-right-from-bracket"></i>';
+                }
+                ?>
+                
+            
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link h3" href="./viewCart.php"><i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i></a>
