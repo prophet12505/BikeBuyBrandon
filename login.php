@@ -24,7 +24,7 @@
         $AuthLoginResult=$accountService->AuthLogin($_POST['email'],$_POST['password']);
         //successfully logged in
         if($AuthLoginResult['status']==0){
-            //session_start();
+
             $_SESSION['user_id'] = $AuthLoginResult['value']['user_id'];
             $_SESSION['name'] = $AuthLoginResult['value']['name'];
             $_SESSION['email'] = $AuthLoginResult['value']['email'];

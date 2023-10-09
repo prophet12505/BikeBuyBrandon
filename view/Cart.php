@@ -47,6 +47,7 @@
         ";
 
         echo '<input type="submit" name="submit" value="Update Cart"  class="btn btn-primary">';
+        echo '<a href="./checkout.php" "  class="btn btn-info">Checkout</a>';
 
     }
 

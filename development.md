@@ -18,9 +18,12 @@
 
 
 # Features
+
+
+## styling issues related to cart and so on
+## login navbar change should be displayed earily
+## fix card display issue
 ## responsiveness
-
-
 
 # Note
 ## PDO is not necessary
@@ -39,3 +42,6 @@
 -202 : user is not found for the given email and password
 -211 : sign up email already exists
 -
+### checkout service
+-301 : checkout error - unknown source
+

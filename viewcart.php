@@ -2,7 +2,7 @@
     //notice : you don't need to login to add to cart 
     //start the session and then include the header
     //to be modified
-    session_start();
+    // session_start();
 
     $title="Shopping cart | by Sean";
     $self=basename($_SERVER['PHP_SELF']);
@@ -21,6 +21,7 @@
             //       ...
             //     }
             //   }
+        //read the post from the page and write it to the session
         $quantity = $_POST['qty'];
         foreach($_SESSION['cart'] as $key=> $value){
             //clear out all quantities
@@ -52,7 +53,7 @@
         print_r($_SESSION['cart']);
         print_r("\n");
         print_r($productService->getCartItems($_SESSION['cart'])['value']);
-       
+    
         $getCartItemsResult=$productService->getCartItems($_SESSION['cart']);
         if($getCartItemsResult['status']==0)
             Cart($_SESSION['cart'],$getCartItemsResult['value']);
