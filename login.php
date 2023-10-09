@@ -13,7 +13,10 @@
     }
      //get endpoint
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if(isset($_GET['msg']))
+        Message($_GET['msg'],"warning");
     LoginForm(true);
+   
   }
    //post endpoint
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -33,9 +36,10 @@
             //setcookie('firstname',$_SESSION['firstname'],time()+86400*30,"/");
             //redirect user to a loggined page
             //print_r($_SESSION);
-            //redirect_user('./index.php');
+            //refresh header
+            // redirect_user('./login.php');
             Message('You have successfully logged in', 'success');
-            ButtonGroup(['backToIndex']);
+            ButtonGroup(['backToIndex','viewCart']);
             //session_destroy();
         }
         else if($AuthLoginResult['status']==201){

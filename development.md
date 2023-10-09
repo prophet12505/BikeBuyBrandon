@@ -13,10 +13,6 @@
 ## a check out function 
 
 
-
-
-
-
 # Features
 
 
@@ -24,6 +20,8 @@
 ## login navbar change should be displayed earily
 ## fix card display issue
 ## responsiveness
+## message is not aligned in index
+
 
 # Note
 ## PDO is not necessary

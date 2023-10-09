@@ -5,16 +5,24 @@ include("./view/Carousel.php");
 include("./view/CategoryBar.php");
 include("./service/ProductService.php");
 include('./view/CardList.php');
+include('./view/Message.php');
 $category="All categories";
 
-  // render carouser 
-  // render category bar
-  Carousel();
-  CategoryBar();
+
 
 
   //get endpoint
   if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+ 
+      // render carouser 
+      // render category bar
+      if(isset($_GET['msg'])){
+        Message($_GET['msg'],'warning');
+      }
+      Carousel();
+   
+      CategoryBar();
+
     include("./inc/dbconnect.php");
     $productService=new productService($dbc);
       if (isset($_GET['category'])) {

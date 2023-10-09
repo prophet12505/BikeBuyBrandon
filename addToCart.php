@@ -7,19 +7,18 @@
     $self=basename($_SERVER['PHP_SELF']);
     include("./inc/header.php");
     include("./view/Message.php");
+    include("./view/ButtonGroup.php");
     include("./service/ProductService.php");
 
-    if(isset($_SESSION['cart']))
-        print_r($_SESSION['cart']);
-    else
+    if(!isset($_SESSION['cart']))
         $_SESSION['cart']=array();
         
-if(isset($_GET['product_id']) && filter_var($_GET['product_id'],FILTER_VALIDATE_INT,
-array("options"=>array('min_range'=>1)))){
+    if(isset($_GET['product_id']) && filter_var($_GET['product_id'],FILTER_VALIDATE_INT,
+    array("options"=>array('min_range'=>1)))){
 
         // get the product id 
-    $product_id=$_GET['product_id'];
-    echo '<div class="addcart">';
+        $product_id=$_GET['product_id'];
+
     //check if cart already contains this product 
     if(isset($_SESSION['cart'][$product_id])){
         $_SESSION['cart'][$product_id]['quantity']++; // add 1 ti the current quantity for this product
@@ -48,10 +47,10 @@ array("options"=>array('min_range'=>1)))){
 else{
     Message('Error: incorrect url format','warning');
 }
-
-echo '<p class="indent"><a href="previous.html" onClick="history.back();return false;"><button id="contbutton">Continue Shopping</button></a>
-<a href="viewcart.php"><button id="viewbutton">View Cart</button></a>
-</p></div></div>';
+ButtonGroup(['continueShopping','viewCart']);
+// echo '<p class="indent"><a href="previous.html" onClick="history.back();return false;"><button id="contbutton">Continue Shopping</button></a>
+// <a href="viewcart.php"><button id="viewbutton">View Cart</button></a>
+// </p></div></div>';
 
 require("./inc/footer.php");
 

@@ -24,8 +24,8 @@
 </head>
 <body>
 <div class="container-fluid">
-<nav class="navbar navbar-dark bg-dark d-flex justify-content-between">
-    <ul class="navbar-nav ml-5 mb-2 mb-lg-0">   
+<nav class="navbar navbar-dark bg-dark d-flex justify-content-between ">
+    <ul class="navbar-nav  mb-2 mb-lg-0">   
         <!-- pay attention to relative path, it's crucial -->
         <li class="nav-item">
             <a class="nav-link" href="./index.php">Home</a>

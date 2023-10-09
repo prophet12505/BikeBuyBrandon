@@ -19,6 +19,7 @@ class OrderService
         // add the order to the orders tbl
         //Notice: order is a reserved word, not suitable for a table name
         $sql = "INSERT INTO `order` (user_id, total) VALUES ($userid, $total)";
+
         $result = mysqli_query($this->dbc, $sql);
         // check to see if writing to db was successful
         if (mysqli_affected_rows($this->dbc) == 1) {
@@ -26,7 +27,7 @@ class OrderService
             $orderid = mysqli_insert_id($this->dbc);
 
             //set prepared statement for inserting into items tbl
-            $insert = "INSERT INTO order_item (ordernum, product_id, quantity, product_price) VALUES (?, ?, ?, ?)";
+            $insert = "INSERT INTO order_item (ordernum, product_id, quantity, price) VALUES (?, ?, ?, ?)";
             $stmt = mysqli_prepare($this->dbc, $insert);
             @mysqli_stmt_bind_param($stmt, 'iiid', $orderid, $product_id, $qty, $price);
 

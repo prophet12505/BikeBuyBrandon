@@ -8,11 +8,15 @@ include("./view/Message.php");
 include("./view/CheckoutPage.php");
 
 
-    //get endpoint, default
+    //get endpoint, by default
+    //if not logged in, redirect to login page
+    if(!isset($_SESSION['user_id']))
+        redirect_user("login.php?msg=You must be logged in to checkout");
+
     if(!isset($_SESSION['cart']))
-        redirect_user("index.php");
+        redirect_user("index.php?msg=Your cart is empty");
     $orderService=new OrderService($dbc);
-    print_r($_SESSION);
+
     // set userid and total into variables
     $userid = $_SESSION['user_id'];
     $total = $_SESSION['total'];
@@ -24,7 +28,7 @@ if($checkoutResult['status']==0){
     if(isset($_SESSION['total']))
         unset($_SESSION['total']);
     CheckoutPage($checkoutResult['value']['ordernum'],$checkoutResult['value']['to'],$checkoutResult['value']['displaydst'],$checkoutResult['value']['do'],$checkoutResult['value']['total']);
- 
+
 }
 
 ?>

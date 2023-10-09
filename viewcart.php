@@ -42,17 +42,15 @@
     }
 
 
-    // display page title
-	//echo '<div class="w3-container w3-teal"><h1>' . $title . '<a href="viewcart.php"><i class="fas fa-shopping-cart" id="carticon" title="View Cart"></i></a></h1></div>';
+
 
     //display cart if not empty
     // new instance of product service 
     if(isset($_SESSION['cart'])){
         require("./inc/dbconnect.php");
         $productService = new ProductService($dbc);
-        print_r($_SESSION['cart']);
-        print_r("\n");
-        print_r($productService->getCartItems($_SESSION['cart'])['value']);
+        
+        
     
         $getCartItemsResult=$productService->getCartItems($_SESSION['cart']);
         if($getCartItemsResult['status']==0)
