@@ -1,11 +1,9 @@
 <?php
 class AccountService {
     private $dbc;
-
     public function __construct($dbc) {
         $this->dbc = $dbc;
     }
- 
     //validate and handle error
     public function AuthLogin($email,$pass){
         $errors=array();
@@ -17,7 +15,6 @@ class AccountService {
             if(mysqli_num_rows($result)==1)//have one result
             {
                 $row=mysqli_fetch_array($result,MYSQLI_ASSOC);//retrieve result as an array
-    
                 //return true and the record
                 return array("status" => 0, "value" => $row);
                 // return array(TRUE,$row);//return multiple results in an array form, success
@@ -29,10 +26,7 @@ class AccountService {
             else if(mysqli_num_rows($result)==0){
                 return array("status" => 201, "value" => Null);
             }
-        
-
             mysqli_close($this->dbc);
-
     }
     //move the register process here 
     public function signup($name,$email,$password){
@@ -48,12 +42,7 @@ class AccountService {
             //RegisterForm($showForm = false);
         } else {//email exists
             return array("status" => 211, "value" => Null);
-          
         }
-
-
-
-
     }
 
     // ...

@@ -39,7 +39,6 @@
 -201 : Database error: multiple results for the given email and password
 -202 : user is not found for the given email and password
 -211 : sign up email already exists
--
 ### checkout service
 -301 : checkout error - unknown source
 

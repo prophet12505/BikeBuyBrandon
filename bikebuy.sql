@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 09:41 PM
+-- Generation Time: Oct 09, 2023 at 08:12 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bikebuy`
 --
+CREATE DATABASE IF NOT EXISTS `bikebuy` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bikebuy`;
 
 -- --------------------------------------------------------
 
@@ -27,15 +29,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `comment`
 --
 
-CREATE TABLE `comment` (
-  `comment_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE IF NOT EXISTS `comment` (
+  `comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
   `subject` varchar(255) NOT NULL,
   `comment` text NOT NULL,
-  `comment_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `comment_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`comment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `comment`
@@ -58,33 +62,75 @@ INSERT INTO `comment` (`comment_id`, `first_name`, `last_name`, `email`, `subjec
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE IF NOT EXISTS `order` (
+  `ordernum` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `total` int(11) NOT NULL,
+  `orderdate` datetime DEFAULT current_timestamp(),
+  PRIMARY KEY (`ordernum`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`ordernum`, `user_id`, `total`, `orderdate`) VALUES
+(2, 14, 700, '2023-10-09 14:59:18'),
+(3, 14, 700, '2023-10-09 14:59:48'),
+(4, 14, 268, '2023-10-09 15:02:31'),
+(8, 14, 2908, '2023-10-09 15:42:55'),
+(9, 14, 4516, '2023-10-09 15:59:14'),
+(10, 14, 268, '2023-10-09 16:02:39'),
+(11, 14, 268, '2023-10-09 16:03:32'),
+(12, 14, 268, '2023-10-09 16:04:06'),
+(13, 14, 2718, '2023-10-09 16:06:39'),
+(14, 14, 660, '2023-10-09 16:10:31'),
+(15, 14, 350, '2023-10-09 16:13:40'),
+(16, 14, 268, '2023-10-09 16:14:12'),
+(17, 14, 2220, '2023-10-09 19:41:37');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `order_item`
 --
 
-CREATE TABLE `order_item` (
-  `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `order_item`;
+CREATE TABLE IF NOT EXISTS `order_item` (
+  `item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ordernum` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
-  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `price` float NOT NULL,
+  PRIMARY KEY (`item_id`),
+  KEY `ordernum` (`ordernum`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `order_item`
 --
 
-INSERT INTO `order_item` (`order_id`, `user_id`, `product_id`, `quantity`, `order_date`) VALUES
-(3, 1, 1, 2, '2023-04-05 00:20:06'),
-(4, 2, 2, 1, '2023-04-05 00:20:06'),
-(5, 1, 2, 3, '2023-04-05 02:40:14'),
-(6, 2, 1, 2, '2023-04-05 02:40:14'),
-(7, 1, 1, 1, '2023-04-05 02:40:14'),
-(8, 2, 2, 1, '2023-04-05 02:40:14'),
-(9, 1, 2, 2, '2023-04-05 02:40:14'),
-(10, 2, 1, 1, '2023-04-05 02:40:14'),
-(11, 1, 2, 3, '2023-04-05 02:42:27'),
-(12, 2, 1, 2, '2023-04-05 02:42:27'),
-(13, 1, 1, 1, '2023-04-05 02:42:27');
+INSERT INTO `order_item` (`item_id`, `ordernum`, `product_id`, `quantity`, `price`) VALUES
+(1, 8, 3, 4, 659.99),
+(2, 8, 2, 1, 268),
+(3, 9, 2, 7, 268),
+(4, 9, 3, 4, 659.99),
+(5, 10, 2, 1, 268),
+(6, 11, 2, 1, 268),
+(7, 12, 2, 1, 268),
+(8, 13, 4, 7, 349.99),
+(9, 13, 2, 1, 268),
+(10, 14, 3, 1, 659.99),
+(11, 15, 4, 1, 349.99),
+(12, 16, 2, 1, 268),
+(13, 17, 3, 2, 659.99),
+(14, 17, 5, 1, 899.99);
 
 -- --------------------------------------------------------
 
@@ -92,14 +138,16 @@ INSERT INTO `order_item` (`order_id`, `user_id`, `product_id`, `quantity`, `orde
 -- Table structure for table `product`
 --
 
-CREATE TABLE `product` (
-  `product_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
+  `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `category` enum('Men''s bikes','Women''s bikes','Kids'' bikes','') DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `image_url` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `image_url` varchar(255) NOT NULL,
+  PRIMARY KEY (`product_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `product`
@@ -123,12 +171,14 @@ INSERT INTO `product` (`product_id`, `product_name`, `price`, `category`, `descr
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `user`
@@ -144,75 +194,25 @@ INSERT INTO `user` (`user_id`, `name`, `email`, `password`) VALUES
 (7, 'Olivia Taylor', 'oliviataylor@gmail.com', 'password1237'),
 (8, 'Ethan Clark', 'ethanclark@example.com', 'password1238'),
 (9, 'Ava Wilson', 'avawilson@gmail.com', 'password1239'),
-(10, 'Benjamin Turner', 'benjaminturner@example.com', 'password1240');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `comment`
---
-ALTER TABLE `comment`
-  ADD PRIMARY KEY (`comment_id`);
-
---
--- Indexes for table `order_item`
---
-ALTER TABLE `order_item`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `product_id` (`product_id`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `comment`
---
-ALTER TABLE `comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT for table `order_item`
---
-ALTER TABLE `order_item`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+(10, 'Benjamin Turner', 'benjaminturner@example.com', 'password1240'),
+(13, 'Oliver Rodger', '1233@qq.com', '123'),
+(14, 'Oliver Rodger', '123@qq.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef');
 
 --
 -- Constraints for dumped tables
 --
 
 --
+-- Constraints for table `order`
+--
+ALTER TABLE `order`
+  ADD CONSTRAINT `order_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
 -- Constraints for table `order_item`
 --
 ALTER TABLE `order_item`
-  ADD CONSTRAINT `order_item_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `order_item_ibfk_1` FOREIGN KEY (`ordernum`) REFERENCES `order` (`ordernum`),
   ADD CONSTRAINT `order_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`product_id`);
 COMMIT;
 

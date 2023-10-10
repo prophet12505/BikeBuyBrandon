@@ -1,10 +1,5 @@
 <?php
-    // $arr essentially is an object(or map), this is the schema of it
-    // $arr(
-    //     "product_name" => "title of the good",
-    //     "price" => "price of the good",
-    //     "image_url" => "url of the image"
-    // ),
+    // $arr essentially is an object(or map)
     // render card function 
     function Card($arr){
         // maximun title characters
@@ -15,7 +10,7 @@
     // print_r($arr);
         echo (
             '
-            <div class="card col-md-2 mt-3" >
+            <div class="card mt-3 mx-2" >
                 <div class="card-body">
                 <h5 class="card-title">'.$arr["product_name"].'</h5>
                 <p class="card-text card-price">$'.$arr['price'].'</p>

@@ -9,7 +9,6 @@ function RegisterForm($showForm = true)
     if ($showForm) {
         //include('./inc/registerForm.php');
         ?>
-        
         <!-- registerForm html to be injected  -->
         <form name="formRegister" action="./register.php" class="form-group" method="post" novalidate>
             <p style="color: red;">All fields are required</p>

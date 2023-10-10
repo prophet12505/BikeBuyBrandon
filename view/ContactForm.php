@@ -2,7 +2,6 @@
 // form component for contact 
 function ContactForm($showForm = true)
 {
-    //
     if ($showForm) {
         //include('./inc/contactForm.php');
         //contact Form HTML to be injected

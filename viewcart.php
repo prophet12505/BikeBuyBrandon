@@ -4,7 +4,7 @@
     //to be modified
     // session_start();
 
-    $title="Shopping cart | by Sean";
+    $title="Bike Buy Brandon | Cart";
     $self=basename($_SERVER['PHP_SELF']);
     include("./inc/header.php");
     include("./view/Cart.php");

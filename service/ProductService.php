@@ -2,7 +2,6 @@
 class ProductService
 {
     private $dbc;
-
     public function __construct($dbc)
     {
         $this->dbc = $dbc;

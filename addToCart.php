@@ -3,7 +3,7 @@
     //notice : you don't need to login to add to cart 
     // note : wrap add to cart with anchor tag   
     // session_start();
-    $title="added to cart";
+    $title="Bike Buy Brandon | Added to cart";
     $self=basename($_SERVER['PHP_SELF']);
     include("./inc/header.php");
     include("./view/Message.php");
